@@ -19,9 +19,11 @@ export function Header({ lang }: { lang: Locale }) {
   useEffect(() => setMounted(true), []);
 
   const navLinks = [
-    { name: dict.header.apps, href: `/${lang}/#apps` },
-    { name: dict.header.about, href: `/${lang}/#about` },
-    { name: dict.header.contact, href: `/${lang}/contact` },
+    { name: "Home", href: `/${lang}/` },
+    { name: "Apps", href: `/${lang}/#apps` },
+    { name: "About Us", href: `/${lang}/#about` },
+    { name: "Services", href: `/${lang}/#services` },
+    { name: "Contact", href: `/${lang}/contact` },
   ];
 
   // Helper to switch language keeping the same path
@@ -33,29 +35,35 @@ export function Header({ lang }: { lang: Locale }) {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/10 bg-background/50 backdrop-blur-xl supports-[backdrop-filter]:bg-background/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-20 items-center justify-between">
           <div className="flex items-center gap-2">
             <Link href={`/${lang}`} className="flex items-center space-x-2">
-              <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400">
-                DS Interactive
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-600 to-brand-400 flex items-center justify-center shadow-lg shadow-brand-500/30">
+                <span className="text-white font-bold text-sm tracking-tighter">DS</span>
+              </div>
+              <span className="text-xl font-medium tracking-wide">
+                Interactive
               </span>
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
+          {/* Desktop Navigation (Centered) */}
+          <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
+                className="text-sm font-medium text-foreground/70 hover:text-white transition-colors"
               >
                 {link.name}
               </Link>
             ))}
-            
+          </nav>
+
+          {/* Right Actions */}
+          <div className="hidden md:flex items-center gap-4">
             {/* Language Switcher */}
             <div className="relative">
               <button
@@ -68,13 +76,13 @@ export function Header({ lang }: { lang: Locale }) {
               </button>
               
               {isLangMenuOpen && (
-                <div className="absolute right-0 mt-2 w-32 bg-card border border-border/50 rounded-xl shadow-lg py-2 z-50">
+                <div className="absolute right-0 mt-2 w-32 bg-card border border-border/50 rounded-xl shadow-lg shadow-black/50 py-2 z-50">
                   {locales.map((l) => (
                     <Link
                       key={l}
                       href={switchLanguagePath(l)}
                       onClick={() => setIsLangMenuOpen(false)}
-                      className="block px-4 py-2 text-sm text-foreground/70 hover:bg-foreground/5 hover:text-foreground uppercase text-center"
+                      className="block px-4 py-2 text-sm text-foreground/70 hover:bg-brand-500/20 hover:text-white uppercase text-center transition-colors"
                     >
                       {l === 'en' ? 'English' : l === 'de' ? 'Deutsch' : 'Shqip'}
                     </Link>
@@ -83,62 +91,25 @@ export function Header({ lang }: { lang: Locale }) {
               )}
             </div>
 
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 rounded-md hover:bg-foreground/5 transition-colors focus:outline-none"
-                aria-label="Toggle dark mode"
-              >
-                {theme === "dark" ? (
-                  <Sun className="h-5 w-5 text-brand-400" />
-                ) : (
-                  <Moon className="h-5 w-5 text-brand-600" />
-                )}
-              </button>
-            )}
-          </nav>
+            <Link 
+              href={`/${lang}/contact`}
+              className="inline-flex h-10 items-center justify-center rounded-full bg-brand-600 px-6 text-sm font-medium text-white shadow-lg shadow-brand-500/30 transition-all hover:bg-brand-500 hover:scale-105"
+            >
+              Let's Talk
+            </Link>
+          </div>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-4 md:hidden">
-            <div className="relative">
-              <button
-                onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                className="flex items-center gap-1 p-2 rounded-md hover:bg-foreground/5 transition-colors focus:outline-none"
-              >
-                <Globe className="h-4 w-4 text-foreground/70" />
-                <span className="text-xs font-medium text-foreground/70 uppercase">{lang}</span>
-              </button>
-              
-              {isLangMenuOpen && (
-                <div className="absolute right-0 mt-2 w-24 bg-card border border-border/50 rounded-xl shadow-lg py-2 z-50">
-                  {locales.map((l) => (
-                    <Link
-                      key={l}
-                      href={switchLanguagePath(l)}
-                      onClick={() => setIsLangMenuOpen(false)}
-                      className="block px-4 py-2 text-xs text-foreground/70 hover:bg-foreground/5 hover:text-foreground uppercase text-center"
-                    >
-                      {l}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 rounded-md hover:bg-foreground/5 transition-colors focus:outline-none"
-              >
-                {theme === "dark" ? (
-                  <Sun className="h-5 w-5 text-brand-400" />
-                ) : (
-                  <Moon className="h-5 w-5 text-brand-600" />
-                )}
-              </button>
-            )}
+            <Link 
+              href={`/${lang}/contact`}
+              className="inline-flex h-8 items-center justify-center rounded-full bg-brand-600 px-4 text-xs font-medium text-white shadow-lg shadow-brand-500/30 transition-all"
+            >
+              Let's Talk
+            </Link>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 -mr-2 text-foreground/70 hover:text-foreground focus:outline-none"
+              className="p-2 -mr-2 text-foreground/70 hover:text-white focus:outline-none"
             >
               {isMobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -157,7 +128,7 @@ export function Header({ lang }: { lang: Locale }) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-border/40 bg-background"
+            className="md:hidden border-t border-border/20 bg-background/95 backdrop-blur-xl"
           >
             <div className="px-4 py-4 space-y-4">
               {navLinks.map((link) => (
@@ -165,11 +136,23 @@ export function Header({ lang }: { lang: Locale }) {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-base font-medium text-foreground/70 hover:text-foreground transition-colors"
+                  className="block text-base font-medium text-foreground/70 hover:text-white transition-colors"
                 >
                   {link.name}
                 </Link>
               ))}
+              <div className="pt-4 border-t border-border/20 flex gap-4">
+                {locales.map((l) => (
+                  <Link
+                    key={l}
+                    href={switchLanguagePath(l)}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`text-sm font-medium uppercase px-3 py-1 rounded-md ${lang === l ? 'bg-brand-500/20 text-brand-400' : 'text-foreground/70'}`}
+                  >
+                    {l}
+                  </Link>
+                ))}
+              </div>
             </div>
           </motion.div>
         )}

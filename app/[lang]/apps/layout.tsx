@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { getApps } from "@/data/apps";
 import { Locale } from "@/dictionaries";
 import { SidebarNav } from "./SidebarNav";

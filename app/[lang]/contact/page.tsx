@@ -6,7 +6,7 @@ export default async function Contact({ params }: { params: Promise<{ lang: stri
   const dict = getDictionary(lang as Locale);
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24 min-h-[70vh] flex flex-col justify-center items-center">
+    <div className="py-12 flex flex-col justify-center items-center">
       <div className="max-w-2xl w-full text-center space-y-8">
         <div className="space-y-4">
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">

@@ -5,7 +5,7 @@ export default async function Privacy({ params }: { params: Promise<{ lang: stri
   const dict = getDictionary(lang as Locale);
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 max-w-4xl">
+    <div className="py-12 max-w-4xl">
       <div className="space-y-4 mb-12">
         <h1 className="text-4xl font-extrabold tracking-tight">
           {dict.footer.privacyPolicy}

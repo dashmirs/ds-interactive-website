@@ -20,6 +20,7 @@ export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
 
+
 export default async function RootLayout({
   children,
   params,
@@ -41,7 +42,11 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <Header lang={lang as Locale} />
-          <main className="flex-1">{children}</main>
+          
+          <main className="flex-1">
+            {children}
+          </main>
+
           <Footer lang={lang as Locale} />
         </ThemeProvider>
       </body>
