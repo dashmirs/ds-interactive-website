@@ -144,20 +144,18 @@ export default async function AppDetails({ params }: { params: Promise<{ lang: s
       {/* 4D / 3D Screenshot Showcase */}
       <div>
         <h2 className="text-2xl font-bold mb-8">{dict.appDetails.screenshots}</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {screenshots.map((src, idx) => (
             <div 
               key={idx} 
-              className="relative aspect-[9/19] rounded-3xl overflow-hidden shadow-2xl border border-border/50 group"
+              className="relative w-full overflow-hidden rounded-3xl shadow-2xl border border-border/50 group"
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-foreground/5 to-foreground/10 flex items-center justify-center text-foreground/30 text-sm">
-                Foto {idx + 1}
-              </div>
               <Image 
                 src={src} 
                 alt={`${app.name} screenshot ${idx + 1}`} 
-                fill 
-                className="object-cover transition-transform duration-700 group-hover:scale-105 group-hover:rotate-1"
+                width={800}
+                height={1200}
+                className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
                 unoptimized
               />
             </div>
